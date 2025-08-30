@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-
 func TestGetAPIKey(t *testing.T) {
 	tests := []struct {
 		name        string
@@ -33,11 +32,10 @@ func TestGetAPIKey(t *testing.T) {
 		},
 	}
 
-
-for _, tt := range tests {
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			key, err := GetAPIKey(tt.headers)
-			
+
 			if tt.expectedErr != "" {
 				if err == nil {
 					t.Errorf("expected error '%s', got nil", tt.expectedErr)
@@ -52,7 +50,7 @@ for _, tt := range tests {
 					return
 				}
 			}
-			
+
 			if key != tt.expectedKey {
 				t.Errorf("expected key '%s', got '%s'", tt.expectedKey, key)
 			}
@@ -64,7 +62,7 @@ func TestGetAPIKey_ErrorTypes(t *testing.T) {
 	// Test that the specific error variable is returned
 	headers := http.Header{}
 	_, err := GetAPIKey(headers)
-	
+
 	if err != ErrNoAuthHeaderIncluded {
 		t.Errorf("expected ErrNoAuthHeaderIncluded, got %v", err)
 	}
